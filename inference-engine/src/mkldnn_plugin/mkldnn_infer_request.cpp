@@ -18,8 +18,11 @@ MKLDNNPlugin::MKLDNNInferRequest::MKLDNNInferRequest(InferenceEngine::InputsData
 
 
 template <typename T> void MKLDNNPlugin::MKLDNNInferRequest::pushInput(const std::string& inputName, InferenceEngine::Blob::Ptr& inputBlob) {
+#if defined(__ANDROID__)
+    InferenceEngine::TBlob<T> *in_f = static_cast<InferenceEngine::TBlob<T> *>(inputBlob.get());
+#else
     InferenceEngine::TBlob<T> *in_f = dynamic_cast<InferenceEngine::TBlob<T> *>(inputBlob.get());
-
+#endif
     if (in_f == nullptr) {
         THROW_IE_EXCEPTION << "Input data precision not supported. Expected float.";
     }

@@ -431,4 +431,3 @@ LauncherCreator::createInputLauncher(const CNNLayer* layer, const std::vector<IS
     THROW_IE_EXCEPTION << "Failed to reshape: Layer with type `" << layerType
                        << "` can't be input. Supported input types: Input, Const and Memory(with index=1)";
 }
-

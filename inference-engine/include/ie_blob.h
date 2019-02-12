@@ -176,6 +176,13 @@ public:
     }
 
     /**
+     * @brief Returns the tensor desctiption
+     */
+    TensorDesc &getTensorDesc() {
+        return tensorDesc;
+    }
+
+    /**
      * @brief Returns the tensor description
      */
     const TensorDesc &getTensorDesc() const noexcept {

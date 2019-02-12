@@ -20,10 +20,10 @@
 #include "cpu_memory.hpp"
 #include "type_helpers.hpp"
 
-#include "cpu/jit_uni_reorder.hpp"
-#include "cpu/simple_reorder.hpp"
-#include "cpu/wino_reorder.hpp"
-#include "cpu/rnn/rnn_reorders.hpp"
+#include "jit_uni_reorder.hpp"
+#include "simple_reorder.hpp"
+#include "wino_reorder.hpp"
+#include "rnn/rnn_reorders.hpp"
 
 namespace mkldnn {
 namespace impl {

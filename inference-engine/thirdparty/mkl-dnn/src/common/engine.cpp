@@ -19,7 +19,7 @@
 #include "nstl.hpp"
 
 #include "c_types_map.hpp"
-#include "../cpu/cpu_engine.hpp"
+#include "cpu_engine.hpp"
 
 namespace mkldnn {
 namespace impl {

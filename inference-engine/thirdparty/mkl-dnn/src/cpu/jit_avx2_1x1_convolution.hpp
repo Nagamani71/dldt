@@ -17,7 +17,7 @@
 #ifndef CPU_JIT_AVX2_1x1_CONVOLUTION_HPP
 #define CPU_JIT_AVX2_1x1_CONVOLUTION_HPP
 
-#include <common/primitive_attr.hpp>
+#include "primitive_attr.hpp"
 #include "c_types_map.hpp"
 #include "memory_tracking.hpp"
 #include "mkldnn_thread.hpp"

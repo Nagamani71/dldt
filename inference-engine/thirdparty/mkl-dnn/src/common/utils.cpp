@@ -19,7 +19,7 @@
 #define XBYAK64
 #define XBYAK_NO_OP_NAMES
 
-#include <cpu/xbyak/xbyak_util.h>
+#include "xbyak_util.h"
 
 #ifdef _WIN32
 #include <malloc.h>

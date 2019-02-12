@@ -18,9 +18,9 @@
 #include "cpu_memory.hpp"
 #include "type_helpers.hpp"
 
-#include "cpu/cpu_sum.hpp"
-#include "cpu/ref_sum.hpp"
-#include "cpu/simple_sum.hpp"
+#include "cpu_sum.hpp"
+#include "ref_sum.hpp"
+#include "simple_sum.hpp"
 
 namespace mkldnn {
 namespace impl {

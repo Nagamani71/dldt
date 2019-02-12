@@ -774,12 +774,14 @@ void PreProcessData::execute(Blob::Ptr &outBlob, const ResizeAlgorithm &algorith
         batchSize = static_cast<int>(_roiBlob->getTensorDesc().getDims()[0]);
     }
 
+#if !defined (GAPI_STANDALONE)
     if (!_preproc) {
         _preproc.reset(new PreprocEngine);
     }
     if (_preproc->preprocessWithGAPI(_roiBlob, outBlob, algorithm, serial, batchSize)) {
         return;
     }
+#endif
 
     if (batchSize > 1) {
         THROW_IE_EXCEPTION <<   "Batch pre-processing is unsupported in this mode. "
