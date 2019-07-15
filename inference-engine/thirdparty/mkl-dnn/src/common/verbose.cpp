@@ -20,7 +20,9 @@
 #endif
 
 #include "mkldnn.h"
-#include "mkldnn_version.h"
+#if !defined(__ANDROID__)
+    #include "mkldnn_version.h"
+#endif
 #include "c_types_map.hpp"
 #include "verbose.hpp"
 #include "cpu_isa_traits.hpp"
