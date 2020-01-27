@@ -52,7 +52,9 @@
 #endif
 
 #include "mkldnn_types.h"
-#include "mkldnn_version.h"
+#if !defined(__ANDROID__)
+	#include "mkldnn_version.h"
+#endif
 #endif /* DOXYGEN_SHOULD_SKIP_THIS */
 
 #ifdef __cplusplus

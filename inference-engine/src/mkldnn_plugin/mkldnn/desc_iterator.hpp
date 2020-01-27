@@ -8,7 +8,7 @@
 
 #include <string>
 #include <mkldnn_types.h>
-#include <mkldnn.h>
+#include "mkldnn.h"
 
 namespace mkldnn {
 
