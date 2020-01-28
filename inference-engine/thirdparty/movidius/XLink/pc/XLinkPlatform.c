@@ -7,7 +7,11 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
-#include <sys/timeb.h>
+#if defined(__ANDROID__)
+	#include <string.h>
+#else
+	#include <sys/timeb.h>
+#endif
 #include <errno.h>
 #include <assert.h>
 #include <string.h>

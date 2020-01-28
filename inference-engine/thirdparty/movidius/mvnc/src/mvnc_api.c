@@ -604,7 +604,11 @@ ncStatus_t ncDeviceOpen(struct ncDeviceHandle_t **deviceHandlePtr,
             exit(1);
         }
 #else
-        global_lock_fd = open("/tmp/mvnc.mutex", O_CREAT, 0660);
+	#if defined(__ANDROID__)
+            global_lock_fd = open("/data/vendor/neuralnetworks/mvnc.mutex", O_CREAT, 0660);
+        #else
+            global_lock_fd = open("/tmp/mvnc.mutex", O_CREAT, 0660);
+	#endif
         if (global_lock_fd == -1) {
             mvLog(MVLOG_ERROR, "global mutex initialization failed");
             exit(1);
@@ -1297,7 +1301,11 @@ static void printfOverXLinkClose(struct _devicePrivate_t *d) {
     }
 
     if(d->printf_over_xlink_thr_valid) {
-        pthread_cancel(d->printf_over_xlink_thr);
+	#if defined(__ANDROID__)
+       		pthread_kill(d->printf_over_xlink_thr, 0);
+	#else
+		pthread_cancel(d->printf_over_xlink_thr);
+	#endif
         d->printf_over_xlink_thr_valid = 0;
     }
 
