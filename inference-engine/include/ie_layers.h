@@ -551,6 +551,7 @@ public:
      * @brief Constructs a WeightableLayer instance and initiates layer parameters with the given values
      */
     using CNNLayer::CNNLayer;
+
 };
 
 /**
@@ -577,7 +578,11 @@ public:
     /**
      * @brief A convolution paddings end array [X, Y, Z, ...]
      */
+    #if defined(__ANDROID__)
+    DEFINE_PROP(_pads_end);
+    #else
     PropertyVector<unsigned int> _pads_end;
+    #endif
     /**
      * @brief A convolution strides array [X, Y, Z, ...]
      */
@@ -1888,5 +1893,19 @@ public:
     */
     using CNNLayer::CNNLayer;
 };
+#if defined(__ANDROID__)
+class TanHLayer : public CNNLayer {
+    public:
+    using CNNLayer::CNNLayer;
+    float negative_slope;
+};
+
+class SigmoidLayer : public CNNLayer {
+    public:
+    using CNNLayer::CNNLayer;
+    float negative_slope;
+};
+#endif
+
 
 }  // namespace InferenceEngine

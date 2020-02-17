@@ -72,6 +72,10 @@ using AllLayers = std::tuple <
     UniqueLayer*,
     NonMaxSuppressionLayer*,
     ScatterLayer*,
+    #if defined(__ANDROID__)
+    TanHLayer*,
+    SigmoidLayer*,
+    #endif
     CNNLayer*
 >;
 

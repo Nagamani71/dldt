@@ -771,12 +771,14 @@ void PreProcessData::execute(Blob::Ptr &outBlob, const PreProcessInfo& info, boo
 
     batchSize = PreprocEngine::getCorrectBatchSize(batchSize, _roiBlob);
 
+    #if !defined (GAPI_STANDALONE) //OPENVINO change by Android team
     if (!_preproc) {
         _preproc.reset(new PreprocEngine);
     }
     if (_preproc->preprocessWithGAPI(_roiBlob, outBlob, algorithm, fmt, serial, batchSize)) {
         return;
     }
+    #endif
 
     if (batchSize > 1) {
         THROW_IE_EXCEPTION << "Batch pre-processing is unsupported in this mode. "

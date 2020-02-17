@@ -196,7 +196,11 @@ CNNLayerPtr clonelayer(const CNNLayer& source) {
         &layerCloneImpl<CNNLayer                  >,
         &layerCloneImpl<UniqueLayer               >,
         &layerCloneImpl<NonMaxSuppressionLayer    >,
-        &layerCloneImpl<ScatterLayer              >
+        &layerCloneImpl<ScatterLayer              >,
+        #if defined(__ANDROID__)
+        &layerCloneImpl<TanHLayer              >,
+        &layerCloneImpl<SigmoidLayer           >,
+        #endif
     };
     for (auto cloner : cloners) {
         auto cloned = cloner(&source);

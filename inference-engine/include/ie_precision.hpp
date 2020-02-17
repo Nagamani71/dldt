@@ -77,10 +77,17 @@ public:
     }
 
     /** @brief Creates custom precision with specific underlined type */
+    #if defined(__ANDROID__)
+    template <class T>
+    static Precision fromType(const char * typeName) {
+        return Precision(8 * sizeof(T), typeName);
+    }
+    #else
     template <class T>
     static Precision fromType(const char * typeName = nullptr) {
         return Precision(8 * sizeof(T), typeName == nullptr ? typeid(T).name() : typeName);
     }
+    #endif
 
     /** @brief checks whether given storage class T can be used to store objects of current precision */
     template <class T>
@@ -105,8 +112,13 @@ public:
                 CASE(I8, int8_t);
                 CASE2(Q78, int16_t, uint16_t);
                 CASE2(BIN, int8_t, uint8_t);
+                #if defined(__ANDROID__)
+                default :
+                    return areSameStrings(name(), typeName);
+                #else
                 default :
                     return areSameStrings(name(), typeName == nullptr ? typeid(T).name() : typeName);
+                #endif
 #undef CASE
 #undef CASE2
             }

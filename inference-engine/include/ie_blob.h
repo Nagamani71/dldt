@@ -241,6 +241,15 @@ public:
         return SizeVector(tensorDesc.getDims().rbegin(), tensorDesc.getDims().rend());
     }
 
+    // #if defined(__ANDROID__)
+    // /**
+    //  * @brief Returns the tensor description
+    //  */
+    // TensorDesc &getTensorDesc() {   // otherwise, how would I do reshape() ??
+    //     return tensorDesc;
+    // }
+    // #endif
+
     /**
      * @brief Returns the tensor description
      */
@@ -254,6 +263,7 @@ public:
     virtual TensorDesc &getTensorDesc() noexcept {
         return tensorDesc;
     }
+    
 
     /**
      * @brief By default, returns the total number of elements (a product of all the dims or 1 for scalar)

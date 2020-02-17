@@ -32,7 +32,7 @@ bool check_env_variables() {
 #endif
 }
 
-#if !(defined(__APPLE__) || defined(_WIN32))
+#if !(defined(__APPLE__) || defined(_WIN32) || (__ANDROID__))
 /* Get the cores affinity mask for the current process */
 bool get_process_mask(int& ncpus, cpu_set_t*& mask) {
     for (ncpus = sizeof(cpu_set_t) / CHAR_BIT; ncpus < 32768 /* reasonable limit of #cores*/; ncpus <<= 1) {

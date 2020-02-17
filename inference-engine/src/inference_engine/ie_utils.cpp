@@ -165,6 +165,10 @@ InferenceEngine::LayerComplexity getComplexity(const InferenceEngine::CNNLayerPt
 
         // roughly count exp as 1 flop
         {"SoftMax", std::bind(eltwise_complexity, _1, 4, 0)},
+        #if defined(__ANDROID__)
+        {"TanH", std::bind(eltwise_complexity, _1, 1, 0)},
+        {"Sigmoid", std::bind(eltwise_complexity, _1, 1, 0)},
+        #endif
     };
 
     if (layerComplexityLookup.count(type) > 0) {

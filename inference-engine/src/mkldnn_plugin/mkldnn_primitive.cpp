@@ -32,7 +32,11 @@ MKLDNNPrimitive &MKLDNNPrimitive::operator=(const std::shared_ptr<mkldnn::primit
 void MKLDNNPrimitive::setBatchLimit(int batch, size_t inputNum, size_t outputNum) {
     bool success = true;
     auto * primDesc = prim->get_primitive_desc();
+    #if defined(__ANDROID__)
+    auto * concatPrimDesc = static_cast<const mkldnn::impl::cpu::cpu_concat_pd_t *>(primDesc);
+    #else
     auto * concatPrimDesc = dynamic_cast<const mkldnn::impl::cpu::cpu_concat_pd_t *>(primDesc);
+    #endif
     for (int i = 0; success && i < primDesc->n_inputs() && i < inputNum; i++) {
         // Depthwise layers contains weights as input
         if (primDesc->input_pd()->desc()->ndims != primDesc->input_pd(i)->desc()->ndims)
