@@ -89,7 +89,11 @@ public:
     /**
      * @brief A virtual destructor
      */
-    virtual ~CNNLayer() = default;
+    #if defined(__ANDROID__)
+        virtual ~CNNLayer();
+    #else
+        virtual ~CNNLayer() = default;
+    #endif
 
     /**
      * @brief Sets a layer to be fused with
@@ -552,6 +556,9 @@ public:
      */
     using CNNLayer::CNNLayer;
 
+    #if defined(__ANDROID__)
+        virtual ~WeightableLayer();
+    #endif
 };
 
 /**
@@ -635,6 +642,9 @@ public:
      * @brief move constructor
      */
     ConvolutionLayer(ConvolutionLayer &&) = default;
+    #if defined(__ANDROID__)
+        virtual ~ConvolutionLayer();
+    #endif
 };
 
 /**
@@ -644,6 +654,9 @@ class DeconvolutionLayer : public ConvolutionLayer {
  public:
     using ConvolutionLayer::ConvolutionLayer;
     using ConvolutionLayer::operator=;
+    #if defined(__ANDROID__)
+        virtual ~DeconvolutionLayer();
+    #endif
 };
 
 /**
@@ -658,6 +671,9 @@ public:
      * @brief Number of deformable groups
      */
     unsigned int _deformable_group = 1u;
+    #if defined(__ANDROID__)
+        virtual ~DeformableConvolutionLayer();
+    #endif
 };
 
 /**
@@ -740,6 +756,9 @@ public:
      * @brief move constructor
      */
     PoolingLayer(PoolingLayer &&) = default;
+    #if defined(__ANDROID__)
+        virtual ~PoolingLayer();
+    #endif
 };
 
 /**
@@ -837,6 +856,9 @@ public:
      * @brief move constructor
      */
     BinaryConvolutionLayer(BinaryConvolutionLayer &&) = default;
+    #if defined(__ANDROID__)
+        virtual ~BinaryConvolutionLayer();
+    #endif
 };
 
 #undef DEFINE_PROP
@@ -855,6 +877,9 @@ public:
     * @brief Creates a new FullyConnectedLayer instance and initializes layer parameters with the given values.
     */
     using WeightableLayer::WeightableLayer;
+    #if defined(__ANDROID__)
+        virtual ~FullyConnectedLayer();
+    #endif
 };
 
 /**
@@ -874,6 +899,9 @@ public:
     * In current implementation 1 means channels, 0 - batch
     */
     using CNNLayer::CNNLayer;
+    #if defined(__ANDROID__)
+        virtual ~ConcatLayer();
+    #endif
 };
 
 /**
@@ -890,6 +918,9 @@ public:
     * @brief Creates a new SplitLayer instance.
     */
     using CNNLayer::CNNLayer;
+    #if defined(__ANDROID__)
+        virtual ~SplitLayer();
+    #endif
 };
 
 /**
@@ -922,6 +953,9 @@ public:
      * @brief Creates a new NormLayer instance.
      */
     using CNNLayer::CNNLayer;
+    #if defined(__ANDROID__)
+        virtual ~NormLayer();
+    #endif
 };
 
 /**
@@ -937,6 +971,9 @@ public:
      * @brief Creates a new SoftMaxLayer instance.
      */
     using CNNLayer::CNNLayer;
+    #if defined(__ANDROID__)
+        virtual ~SoftMaxLayer();
+    #endif
 };
 
 /**
@@ -955,6 +992,9 @@ public:
      * @brief Bias for squares sum
      */
     float bias = 0.f;
+    #if defined(__ANDROID__)
+        virtual ~GRNLayer();
+    #endif
 };
 
 /**
@@ -978,6 +1018,9 @@ public:
     * @brief Indicate that the result needs to be normalized
     */
     int normalize = 1;
+    #if defined(__ANDROID__)
+        virtual ~MVNLayer();
+    #endif
 };
 
 /**
@@ -994,6 +1037,9 @@ public:
      * @brief Creates a new ReLULayer instance.
      */
     using CNNLayer::CNNLayer;
+    #if defined(__ANDROID__)
+        virtual ~ReLULayer();
+    #endif
 };
 
 /**
@@ -1015,6 +1061,9 @@ public:
      * @brief Creates a new ClampLayer instance.
      */
     using CNNLayer::CNNLayer;
+    #if defined(__ANDROID__)
+        virtual ~ClampLayer();
+    #endif
 };
 
 
@@ -1029,6 +1078,9 @@ public:
     }
 
     using ClampLayer::ClampLayer;
+    #if defined(__ANDROID__)
+        virtual ~ReLU6Layer();
+    #endif
 };
 
 
@@ -1061,6 +1113,9 @@ public:
     * @brief Creates a new EltwiseLayer instance.
     */
     using CNNLayer::CNNLayer;
+    #if defined(__ANDROID__)
+        virtual ~EltwiseLayer();
+    #endif
 };
 
 /**
@@ -1085,6 +1140,9 @@ public:
      * @brief Creates a new CropLayer instance.
      */
     using CNNLayer::CNNLayer;
+    #if defined(__ANDROID__)
+        virtual ~CropLayer();
+    #endif
 };
 
 /**
@@ -1109,6 +1167,9 @@ public:
      * @brief Creates a new ReshapeLayer instance.
      */
     using CNNLayer::CNNLayer;
+    #if defined(__ANDROID__)
+        virtual ~ReshapeLayer();
+    #endif
 };
 
 /**
@@ -1129,6 +1190,9 @@ public:
      * @brief Creates a new TileLayer instance.
      */
     using CNNLayer::CNNLayer;
+    #if defined(__ANDROID__)
+        virtual ~TileLayer();
+    #endif
 };
 
 
@@ -1146,6 +1210,9 @@ public:
      * @brief Creates a new ScaleShiftLayer instance.
      */
     using WeightableLayer::WeightableLayer;
+    #if defined(__ANDROID__)
+        virtual ~ScaleShiftLayer();
+    #endif
 };
 
 /**
@@ -1178,6 +1245,9 @@ public:
     Body body;
 
     using CNNLayer::CNNLayer;
+    #if defined(__ANDROID__)
+        virtual ~TensorIterator();
+    #endif
 };
 
 /**
@@ -1234,6 +1304,9 @@ public:
      * Respective to activation list.
      */
     std::vector<float> activation_beta;
+    #if defined(__ANDROID__)
+        virtual ~RNNCellBase();
+    #endif
 };
 
 /**
@@ -1277,6 +1350,9 @@ class LSTMCell : public RNNCellBase {
  public:
     using RNNCellBase::RNNCellBase;
     using RNNCellBase::operator=;
+    #if defined(__ANDROID__)
+        virtual ~LSTMCell();
+    #endif
 };
 
 /**
@@ -1316,6 +1392,9 @@ class GRUCell : public RNNCellBase {
  public:
     using RNNCellBase::RNNCellBase;
     using RNNCellBase::operator=;
+    #if defined(__ANDROID__)
+        virtual ~GRUCell();
+    #endif
 };
 
 /**
@@ -1350,6 +1429,9 @@ class RNNCell : public RNNCellBase {
  public:
     using RNNCellBase::RNNCellBase;
     using RNNCellBase::operator=;
+    #if defined(__ANDROID__)
+        virtual ~RNNCell();
+    #endif
 };
 
 
@@ -1403,6 +1485,9 @@ public:
 
     /** @copybrief Direction */
     Direction direction = FWD;
+    #if defined(__ANDROID__)
+        virtual ~RNNSequenceLayer();
+    #endif
 };
 
 /**
@@ -1421,6 +1506,9 @@ public:
      * @param prms Initial layer parameters
      */
     explicit PReLULayer(const LayerParams &prms) : WeightableLayer(prms), _channel_shared(false) {}
+    #if defined(__ANDROID__)
+        virtual ~PReLULayer();
+    #endif
 };
 
 /**
@@ -1446,6 +1534,9 @@ public:
      * @brief Creates a new PowerLayer instance.
      */
     using CNNLayer::CNNLayer;
+    #if defined(__ANDROID__)
+        virtual ~PowerLayer();
+    #endif
 };
 
 /**
@@ -1462,6 +1553,9 @@ public:
      * @brief Creates a new BatchNormalizationLayer instance.
      */
     using WeightableLayer::WeightableLayer;
+    #if defined(__ANDROID__)
+        virtual ~BatchNormalizationLayer();
+    #endif
 };
 
 /**
@@ -1490,6 +1584,9 @@ public:
     * @brief Creates a new GemmLayer instance.
     */
     using CNNLayer::CNNLayer;
+    #if defined(__ANDROID__)
+        virtual ~GemmLayer();
+    #endif
 };
 
 /**
@@ -1526,6 +1623,9 @@ public:
     * @brief Creates a new PadLayer instance.
     */
     using CNNLayer::CNNLayer;
+    #if defined(__ANDROID__)
+        virtual ~PadLayer();
+    #endif
 };
 
 /**
@@ -1542,6 +1642,9 @@ public:
     * @brief Creates a new GatherLayer instance.
     */
     using CNNLayer::CNNLayer;
+    #if defined(__ANDROID__)
+        virtual ~GatherLayer();
+    #endif
 };
 
 /**
@@ -1579,6 +1682,9 @@ public:
     * @brief Creates a new StridedSliceLayer instance.
     */
     using CNNLayer::CNNLayer;
+    #if defined(__ANDROID__)
+        virtual ~StridedSliceLayer();
+    #endif
 };
 
 /**
@@ -1601,6 +1707,9 @@ public:
     * @brief Creates a new ShuffleChannelsLayer instance.
     */
     using CNNLayer::CNNLayer;
+    #if defined(__ANDROID__)
+        virtual ~ShuffleChannelsLayer();
+    #endif
 };
 
 
@@ -1619,6 +1728,9 @@ public:
     * @brief Creates a new DepthToSpaceLayer instance.
     */
     using CNNLayer::CNNLayer;
+    #if defined(__ANDROID__)
+        virtual ~DepthToSpaceLayer();
+    #endif
 };
 
 
@@ -1637,6 +1749,9 @@ public:
     * @brief Creates a new SpaceToDepthLayer instance.
     */
     using CNNLayer::CNNLayer;
+    #if defined(__ANDROID__)
+        virtual ~SpaceToDepthLayer();
+    #endif
 };
 
 
@@ -1650,6 +1765,9 @@ public:
     * @brief Creates a new SparseFillEmptyRowsLayer instance.
     */
     using CNNLayer::CNNLayer;
+    #if defined(__ANDROID__)
+        virtual ~SparseFillEmptyRowsLayer();
+    #endif
 };
 
 
@@ -1673,6 +1791,9 @@ public:
     * @brief Creates a new ReverseSequence instance.
     */
     using CNNLayer::CNNLayer;
+    #if defined(__ANDROID__)
+        virtual ~ReverseSequenceLayer();
+    #endif
 };
 
 
@@ -1706,6 +1827,9 @@ public:
     * @brief Creates a new OneHot instance
     */
     using CNNLayer::CNNLayer;
+    #if defined(__ANDROID__)
+        virtual ~OneHotLayer();
+    #endif
 };
 
 
@@ -1719,6 +1843,9 @@ public:
     * @brief Creates a new RangeLayer instance.
     */
     using CNNLayer::CNNLayer;
+    #if defined(__ANDROID__)
+        virtual ~RangeLayer();
+    #endif
 };
 
 
@@ -1732,6 +1859,9 @@ public:
     * @brief Creates a new Fill instance.
     */
     using CNNLayer::CNNLayer;
+    #if defined(__ANDROID__)
+        virtual ~FillLayer();
+    #endif
 };
 
 
@@ -1747,6 +1877,9 @@ public:
     * @brief Creates a new SelectLayer instance.
     */
     using CNNLayer::CNNLayer;
+    #if defined(__ANDROID__)
+        virtual ~SelectLayer();
+    #endif
 };
 
 
@@ -1760,6 +1893,9 @@ public:
     * @brief Creates a new Broadcast instance.
     */
     using CNNLayer::CNNLayer;
+    #if defined(__ANDROID__)
+        virtual ~BroadcastLayer();
+    #endif
 };
 
 /**
@@ -1777,6 +1913,9 @@ public:
     * @brief Creates a new QuantizeLayer instance.
     */
     using CNNLayer::CNNLayer;
+    #if defined(__ANDROID__)
+        virtual ~QuantizeLayer();
+    #endif
 };
 
 
@@ -1790,6 +1929,9 @@ public:
     * @brief Creates a new Math instance.
     */
     using CNNLayer::CNNLayer;
+    #if defined(__ANDROID__)
+        virtual ~MathLayer();
+    #endif
 };
 
 
@@ -1808,6 +1950,9 @@ public:
     * @brief Creates a new Reduce instance.
     */
     using CNNLayer::CNNLayer;
+    #if defined(__ANDROID__)
+        virtual ~ReduceLayer();
+    #endif
 };
 
 
@@ -1834,6 +1979,9 @@ public:
     * @brief Creates a new TopKLayer instance.
     */
     using CNNLayer::CNNLayer;
+    #if defined(__ANDROID__)
+        virtual ~TopKLayer();
+    #endif
 };
 
 
@@ -1860,6 +2008,9 @@ public:
     * @brief Creates a new UniqueLayer instance.
     */
     using CNNLayer::CNNLayer;
+    #if defined(__ANDROID__)
+        virtual ~UniqueLayer();
+    #endif
 };
 
 
@@ -1876,6 +2027,9 @@ public:
     * @brief Creates a new NonMaxSuppressionLayer instance.
     */
     using CNNLayer::CNNLayer;
+    #if defined(__ANDROID__)
+        virtual ~NonMaxSuppressionLayer();
+    #endif
 };
 
 
@@ -1892,20 +2046,26 @@ public:
     * @brief Creates a new ScatterLayer instance.
     */
     using CNNLayer::CNNLayer;
+    #if defined(__ANDROID__)
+        virtual ~ScatterLayer();
+    #endif
 };
+
 #if defined(__ANDROID__)
 class TanHLayer : public CNNLayer {
     public:
     using CNNLayer::CNNLayer;
     float negative_slope;
+    virtual ~TanHLayer();
 };
 
 class SigmoidLayer : public CNNLayer {
     public:
     using CNNLayer::CNNLayer;
     float negative_slope;
+    virtual ~SigmoidLayer();
 };
 #endif
 
-
 }  // namespace InferenceEngine
+

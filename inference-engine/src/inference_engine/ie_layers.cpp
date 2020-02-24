@@ -38,9 +38,9 @@
 
 using namespace InferenceEngine;
 #if defined(__ANDROID__)
-// CNNLayer::~CNNLayer() {
+CNNLayer::~CNNLayer() {
 
-// }
+}
 
 WeightableLayer::~WeightableLayer(){
 
