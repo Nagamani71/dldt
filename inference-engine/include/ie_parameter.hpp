@@ -110,7 +110,11 @@ public:
      */
     template<class T>
     bool is() const {
+    	#if defined(__ANDROID__)
+        return empty() ? false : flase;
+        #else
         return empty() ? false : ptr->is(typeid(T));
+        #endif	
     }
 
     /**
@@ -228,7 +232,13 @@ private:
         using std::tuple<T>::tuple;
 
         bool is(const std::type_info& id) const override {
-            return id == typeid(T);
+	    //#if defined(__ANDROID__)
+            //return id == dynamic_cast<T>();
+            //#else
+            //return id == typeid(T);
+	   // return id == dynamic_cast<T*>(this);
+            //#endif
+	    return true;
         }
         Any *copy() const override {
             return new RealData{get()};
@@ -255,7 +265,13 @@ private:
         }
 
         bool operator==(const Any& rhs) const override {
-            return rhs.is(typeid(T)) && equal<T>(*this, rhs);
+	    //#if defined(__ANDROID__)
+            //return rhs.is(dynamic_cast<T>(&rhs)) && equal<T>(*this, rhs);
+            //#else
+           // return rhs.is(typeid(T)) && equal<T>(*this, rhs);
+           // #endif
+	   //return dyn_cast<T>(&rhs) == T && equal<T>(*this, rhs);
+	   return equal<T>(*this, rhs);
         }
     };
 

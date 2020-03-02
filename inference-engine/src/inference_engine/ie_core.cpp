@@ -366,10 +366,14 @@ Core::Core(const std::string & xmlConfigFile) {
     _impl = std::make_shared<Impl>();
 
     std::string xmlConfigFile_ = xmlConfigFile;
+#if defined(__ANDROID__)
+    xmlConfigFile_ = "/vendor/etc/plugins.xml";
+#else
     if (xmlConfigFile_.empty()) {
         // register plugins from default plugins.xml config
         xmlConfigFile_ = FileUtils::makePath(getIELibraryPath(), "plugins.xml");
     }
+#endif
 
     RegisterPlugins(xmlConfigFile_);
 }
